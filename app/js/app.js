@@ -6,7 +6,7 @@ app.constant('baseServiceUrl', 'http://softuni-social-network.azurewebsites.net'
         $routeProvider.when('/', {
             templateUrl: 'templates/welcome.html'
         });
-        $routeProvider.when('/', {
+        $routeProvider.when('/home', {
             templateUrl: 'templates/user-homescreen.html'
         });
 
