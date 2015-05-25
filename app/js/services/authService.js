@@ -1,4 +1,4 @@
-app.factory('authService', function ($http, baseServiceUrl, notifyService) {
+app.factory('authService', function ($http, baseServiceUrl, notifyService, $route) {
 
     function logout() {
         var logoutUrl = baseServiceUrl + '/api/users/logout';
@@ -10,6 +10,9 @@ app.factory('authService', function ($http, baseServiceUrl, notifyService) {
             }
         }).success(function () {
             localStorage.clear();
+            console.log('izlezna');
+        }).error(function () {
+            console.log('greshka');
         });
     }
 
@@ -23,7 +26,9 @@ app.factory('authService', function ($http, baseServiceUrl, notifyService) {
         $http.post(loginServiceUrl, data).success(function (data) {
             localStorage['Authorization'] = 'Bearer ' + data['access_token'];
             localStorage['username'] = data['userName'];
+            localStorage['name'] = data['name'];
             console.log("You have logged in!");
+            $route.reload();
         }).error(function () {
             console.log("error");
         });
@@ -41,6 +46,7 @@ app.factory('authService', function ($http, baseServiceUrl, notifyService) {
         return $http.post(registerServiceUrl, data).success(function (data) {
             localStorage['Authorization'] = 'Bearer ' + data['access_token'];
             localStorage['username'] = data['userName'];
+            localStorage['name'] = data['name'];
             localStorage['gender'] = gender;
             console.log('stana!');
         }).error(function (error) {
@@ -51,8 +57,9 @@ app.factory('authService', function ($http, baseServiceUrl, notifyService) {
     function isLoggedIn() {
         if (localStorage['Authorization']) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     function getCurrentUser() {
