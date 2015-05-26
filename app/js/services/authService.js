@@ -10,6 +10,7 @@ app.factory('authService', function ($http, baseServiceUrl, notifyService, $rout
             }
         }).success(function () {
             localStorage.clear();
+            $route.reload();
             console.log('izlezna');
         }).error(function () {
             console.log('greshka');
@@ -48,6 +49,7 @@ app.factory('authService', function ($http, baseServiceUrl, notifyService, $rout
             localStorage['username'] = data['userName'];
             localStorage['name'] = data['name'];
             localStorage['gender'] = gender;
+            $route.reload();
             console.log('stana!');
         }).error(function (error) {
             console.log(error.message);
