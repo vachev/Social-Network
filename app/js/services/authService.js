@@ -42,13 +42,11 @@ app.factory('authService', function ($http, baseServiceUrl, notifyService, $rout
             password: password,
             confirmPassword: confirmPassword,
             name: name,
-            email: email
+            email: email,
+            gender: gender
         };
         return $http.post(registerServiceUrl, data).success(function (data) {
             localStorage['Authorization'] = 'Bearer ' + data['access_token'];
-            localStorage['username'] = data['userName'];
-            localStorage['name'] = data['name'];
-            localStorage['gender'] = gender;
             $route.reload();
             console.log('stana!');
         }).error(function (error) {
@@ -64,16 +62,10 @@ app.factory('authService', function ($http, baseServiceUrl, notifyService, $rout
         }
     }
 
-    function getCurrentUser() {
-        // TODO
-        console.error("Method not implemented yet.")
-    }
-
     return {
         login: login,
         register: register,
         logout: logout,
-        isLoggedIn: isLoggedIn,
-        getCurrentUser: getCurrentUser
+        isLoggedIn: isLoggedIn
     };
 });
