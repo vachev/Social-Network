@@ -2,7 +2,6 @@ app.controller('NewsFeedController', function ($scope, postServices, $route) {
     function updateNews() {
         postServices.getNewsFeedPages(5, '').success(function (data) {
             $scope.posts = data;
-            console.log(data)
         });
     }
         updateNews();

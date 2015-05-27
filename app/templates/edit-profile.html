@@ -50,8 +50,7 @@
                         <label for="inputCoverImageData" class="col-md-3 control-label">Cover picture<br />Limit: 1024kb</label>
                         <div class="col-md-9">
                             <img class="img-rounded center-block" src="{{coverPic}}" style="max-height: 110px"/>
-                            <input type="file" class="form-control" ng-init="coverPhoto = coverPhoto" ng-model="coverPhoto" base-sixty-four-input id="inputCoverImageData" ng-change="formatCoverImgToBase64()">
-
+                            <input type="file" class="form-control" ng-model="coverPhoto" base-sixty-four-input id="inputCoverImageData" ng-change="formatCoverImgToBase64()">
                         </div>
                     </div>
 
@@ -61,13 +60,15 @@
     </div>
 
     <div class="panel panel-default col-md-4">
+        <div class="panel-body">
         <div class="form-group">
             <label for="inputProfileImageData" class="col-md-3 control-label">Profile picture<br />Limit: 128kb</label>
             <div class="col-md-9">
                 <img class="img-rounded center-block" src="{{profilePic}}" style="max-height: 110px"/>
-                <input type="file" class="form-control" ng-init="profilePhoto = profilePhoto" ng-model="profilePhoto" base-sixty-four-input id="inputProfileImageData" ng-change="formatProfileImgToBase64()">
+                <input type="file" class="form-control" ng-model="profilePhoto" base-sixty-four-input id="inputProfileImageData" ng-change="formatProfileImgToBase64()">
             </div>
         </div>
+    </div>
     </div>
     <div class="col-md-8 col-lg-offset-2">
         <button type="submit" class="btn btn-primary center-block" ng-click="editProfile()">Save changes</button>

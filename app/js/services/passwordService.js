@@ -1,4 +1,4 @@
-app.factory('passwordService', function ($http, baseServiceUrl, notifyService, $route) {
+app.factory('passwordService', function ($http, baseServiceUrl, Notification) {
 
     function changePassword(oldPass, newPass, confPass) {
         var passwordServiceUrl = baseServiceUrl + '/api/me/changepassword';
@@ -13,10 +13,10 @@ app.factory('passwordService', function ($http, baseServiceUrl, notifyService, $
             headers: {
                 'Authorization' : authToken
             }
-        }).success(function () {
-            console.log('smenena');
-        }).error(function () {
-            console.log('greshka');
+        }).success(function (data) {
+            Notification.success(data.message);
+        }).error(function (err) {
+            Notification.error(err.message);
         });
     }
 

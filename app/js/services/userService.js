@@ -1,4 +1,4 @@
-app.factory('userService', function ($http, baseServiceUrl, notifyService, $route) {
+app.factory('userService', function ($http, baseServiceUrl, $route) {
 
     function getDataAboutMe() {
         var aboutMeUrl = baseServiceUrl + '/api/me';
@@ -19,7 +19,7 @@ app.factory('userService', function ($http, baseServiceUrl, notifyService, $rout
         });
     }
     function getFriends() {
-        var aboutMeUrl = baseServiceUrl + '/api/me/friends';
+        var aboutMeUrl = baseServiceUrl + '/api/me/friends/preview';
 
         return $http.get(aboutMeUrl, {
             headers: {

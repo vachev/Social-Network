@@ -4,7 +4,7 @@
 
     <h1>News Feed</h1>
     <div class="col-md-8">
-
+                <div ng-if="posts.length == 0"><p>You dont have any friends, use the search bar to find some :)</p></div>
                 <div ng-repeat="post in posts">
                     <div class="panel panel-default">
                         <div class="panel-body">

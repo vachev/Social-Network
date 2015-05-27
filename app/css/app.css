@@ -1,5 +1,5 @@
 .friend-img {
-    margin: 0px 15px 15px 0px;
+    margin: 10px;
 }
 .img-small {
     max-width: 35px;
@@ -10,4 +10,20 @@
 }
 .img-medium {
     max-width: 75px;
+}
+.navbar-top {
+    margin-top: 10px;
+}
+
+html, body {
+    height: 100%;
+    background: url(http://wallrere.com/wp-content/uploads/2015/05/white-background-wallpaper-2956247.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: auto;
+}
+
+.nopadding {
+    padding: 0px;
 }

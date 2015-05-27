@@ -3,16 +3,15 @@
         <div class="panel-heading">
             <h3 class="panel-title">Friends - {{totalFriends}} total</h3>
         </div>
-        <div class="panel-body">
-            <a href="#"><img class="friend-img img-circle img-thumbnail" src="http://www.orlando4funinthesun.com/images/50x50.gif" /></a>
-            <a href="#"><img class="friend-img img-circle img-thumbnail" src="http://www.orlando4funinthesun.com/images/50x50.gif" /></a>
-            <a href="#"><img class="friend-img img-circle img-thumbnail" src="http://www.orlando4funinthesun.com/images/50x50.gif" /></a>
-            <a href="#"><img class="friend-img img-circle img-thumbnail" src="http://www.orlando4funinthesun.com/images/50x50.gif" /></a>
-            <a href="#"><img class="friend-img img-circle img-thumbnail" src="http://www.orlando4funinthesun.com/images/50x50.gif" /></a>
-            <a href="#"><img class="friend-img img-circle img-thumbnail" src="http://www.orlando4funinthesun.com/images/50x50.gif" /></a>
-            <a href="#"><img class="friend-img img-circle img-thumbnail" src="http://www.orlando4funinthesun.com/images/50x50.gif" /></a>
-            <a href="#"><img class="friend-img img-circle img-thumbnail" src="http://www.orlando4funinthesun.com/images/50x50.gif" /></a>
-            <a>See all</a>
+        <div class="panel-body nopadding">
+            <a ng-repeat="friend in friends" ng-href="#/users/{{friend.username}}">
+                <img ng-if="friend.profileImageData" class="friend-img img-circle img-thumbnail img-medium" src="{{friend.profileImageData}}" />
+                <img ng-if="!friend.profileImageData" class="friend-img img-circle img-thumbnail img-medium" src="{{defaultPic}}"/>
+            </a>
+            <div class="panel-footer text-right">
+                <a >See all</a>
+            </div>
+
         </div>
     </div>
     </div>

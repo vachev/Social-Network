@@ -1,4 +1,4 @@
-app.factory('authService', function ($http, baseServiceUrl, notifyService, $route) {
+app.factory('authService', function ($http, baseServiceUrl, $route, userService, defaultProfilePic) {
 
     function logout() {
         var logoutUrl = baseServiceUrl + '/api/users/logout';
@@ -47,6 +47,7 @@ app.factory('authService', function ($http, baseServiceUrl, notifyService, $rout
         };
         return $http.post(registerServiceUrl, data).success(function (data) {
             localStorage['Authorization'] = 'Bearer ' + data['access_token'];
+            userService.editProfile(name, email, defaultProfilePic, defaultProfilePic, gender);
             $route.reload();
             console.log('stana!');
         }).error(function (error) {

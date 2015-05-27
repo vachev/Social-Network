@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" ng-controller="NavigationController">
+<nav class="navbar navbar-default navbar-top" ng-controller="NavigationController">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#/">Social Network</a>
@@ -9,13 +9,14 @@
                 <li class="active">
                     <a href="#"><img class="img-circle" style="margin: -11px 10px -9px 0px; max-width: 38px; max-height:38px" src="{{profilePic}}"/> {{name}}<span class="sr-only">(current)</span></a>
                 </li>
+                <li><a href="#">My Friends</a></li>
                 <li><a href="#">Friend Requests <span class="badge">{{requestCount}}</span></a></li>
             </ul>
             <form class="navbar-form navbar-right" role="search">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search users" ng-model="keywords" ng-change="search()">
-                    <div class="search-results panel panel-default col-lg-3" ng-if="keywords">
-                            <div class="panel-body">
+                    <div class="search-results panel panel-default col-lg-3 nopadding" ng-if="keywords">
+                            <div class="panel-body nopadding">
                         <table class="table table-striped table-hover ">
                             <thead>
                             <tr>
