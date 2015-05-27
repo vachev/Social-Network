@@ -1,3 +1,13 @@
 .friend-img {
     margin: 0px 15px 15px 0px;
 }
+.img-small {
+    max-width: 35px;
+}
+.search-results {
+    position: absolute;
+    z-index: 1;
+}
+.img-medium {
+    max-width: 75px;
+}

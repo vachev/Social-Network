@@ -27,6 +27,18 @@ app.factory('userService', function ($http, baseServiceUrl, notifyService, $rout
             }
         });
     }
+    function getFriendsByName(keywords) {
+        if (keywords) {
+            var friendUrl = baseServiceUrl + '/api/users/search?searchTerm=' + keywords;
+
+            return $http.get(friendUrl, {
+                headers: {
+                    'Authorization' : localStorage['Authorization']
+                }
+            });
+        }
+
+    }
     function editProfile(name, email, profilePic, coverPic, gender) {
         var editProfileUrl = baseServiceUrl + '/api/me';
         var data = {
@@ -48,6 +60,7 @@ app.factory('userService', function ($http, baseServiceUrl, notifyService, $rout
         getDataAboutMe: getDataAboutMe,
         getFriendRequests: getFriendRequests,
         getFriends: getFriends,
-        editProfile: editProfile
+        editProfile: editProfile,
+        getFriendsByName: getFriendsByName
     };
 });

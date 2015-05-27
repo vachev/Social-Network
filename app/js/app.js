@@ -15,6 +15,10 @@ app.constant('baseServiceUrl', 'http://softuni-social-network.azurewebsites.net'
             templateUrl: 'templates/edit-profile.html',
             controller: 'EditProfileController'
         });
+        $routeProvider.when('/users/:username', {
+            templateUrl: 'templates/user-wall.html',
+            controller: 'UserWallController'
+        });
 
     $routeProvider.otherwise(
        { redirectTo: '/' }
