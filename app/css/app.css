@@ -4,6 +4,12 @@
 .img-small {
     max-width: 35px;
 }
+.request-results {
+    position: absolute;
+    top: 50px;
+    right: 450px;
+    z-index: 1;
+}
 .search-results {
     position: absolute;
     z-index: 1;

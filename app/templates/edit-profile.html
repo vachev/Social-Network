@@ -10,6 +10,7 @@
                 <fieldset>
                     <div class="form-group">
                         <label for="name" class="col-lg-2 control-label">Name</label>
+
                         <div class="col-lg-10">
                             <input ng-model="name" type="text" class="form-control" id="name" placeholder="{{name}}">
                         </div>
@@ -17,6 +18,7 @@
 
                     <div class="form-group">
                         <label for="email" class="col-lg-2 control-label">E-mail</label>
+
                         <div class="col-lg-10">
                             <input ng-model="email" type="text" class="form-control" id="email" placeholder="{{email}}">
                         </div>
@@ -24,22 +26,26 @@
 
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Gender</label>
+
                         <div class="col-lg-10">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" ng-model="regGender" name="optionsRadios" id="genderMale" value="Male" checked="">
+                                    <input type="radio" ng-model="regGender" name="optionsRadios" id="genderMale"
+                                           value="Male" checked="">
                                     Male
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" ng-model="regGender" name="optionsRadios" id="genderFemale" value="Female">
+                                    <input type="radio" ng-model="regGender" name="optionsRadios" id="genderFemale"
+                                           value="Female">
                                     Female
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" ng-model="regGender" name="optionsRadios" id="genderOther" value="Other">
+                                    <input type="radio" ng-model="regGender" name="optionsRadios" id="genderOther"
+                                           value="Other">
                                     Other
                                 </label>
                             </div>
@@ -47,10 +53,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputCoverImageData" class="col-md-3 control-label">Cover picture<br />Limit: 1024kb</label>
+                        <label for="inputCoverImageData" class="col-md-3 control-label">Cover picture<br/>Limit: 1024kb</label>
+
                         <div class="col-md-9">
                             <img class="img-rounded center-block" src="{{coverPic}}" style="max-height: 110px"/>
-                            <input type="file" class="form-control" ng-model="coverPhoto" base-sixty-four-input id="inputCoverImageData" ng-change="formatCoverImgToBase64()">
+                            <input type="file"  class="form-control" ng-model="coverPhoto" base-sixty-four-input
+                                   id="inputCoverImageData" ng-change="formatCoverImgToBase64()">
                         </div>
                     </div>
 
@@ -61,16 +69,19 @@
 
     <div class="panel panel-default col-md-4">
         <div class="panel-body">
-        <div class="form-group">
-            <label for="inputProfileImageData" class="col-md-3 control-label">Profile picture<br />Limit: 128kb</label>
-            <div class="col-md-9">
-                <img class="img-rounded center-block" src="{{profilePic}}" style="max-height: 110px"/>
-                <input type="file" class="form-control" ng-model="profilePhoto" base-sixty-four-input id="inputProfileImageData" ng-change="formatProfileImgToBase64()">
+            <div class="form-group">
+                <label for="inputProfileImageData" class="col-md-3 control-label">Profile picture<br/>Limit:
+                    128kb</label>
+
+                <div class="col-md-9">
+                    <img class="img-rounded center-block" src="{{profilePic}}" style="max-height: 110px"/>
+                    <input type="file" class="form-control" ng-model="profilePhoto" base-sixty-four-input
+                           id="inputProfileImageData" ng-change="formatProfileImgToBase64()">
+                </div>
             </div>
         </div>
     </div>
-    </div>
     <div class="col-md-8 col-lg-offset-2">
         <button type="submit" class="btn btn-primary center-block" ng-click="editProfile()">Save changes</button>
-</div>
+    </div>
 </div>

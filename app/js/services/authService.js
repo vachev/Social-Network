@@ -6,7 +6,7 @@ app.factory('authService', function ($http, baseServiceUrl, $route, userService,
 
         return $http.post(logoutUrl, null, {
             headers: {
-                'Authorization' : authToken
+                'Authorization': authToken
             }
         }).success(function () {
             localStorage.clear();
@@ -27,7 +27,6 @@ app.factory('authService', function ($http, baseServiceUrl, $route, userService,
         $http.post(loginServiceUrl, data).success(function (data) {
             localStorage['Authorization'] = 'Bearer ' + data['access_token'];
             localStorage['username'] = data['userName'];
-            localStorage['name'] = data['name'];
             console.log("You have logged in!");
             $route.reload();
         }).error(function () {
@@ -47,6 +46,7 @@ app.factory('authService', function ($http, baseServiceUrl, $route, userService,
         };
         return $http.post(registerServiceUrl, data).success(function (data) {
             localStorage['Authorization'] = 'Bearer ' + data['access_token'];
+            localStorage['username'] = data['userName'];
             userService.editProfile(name, email, defaultProfilePic, defaultProfilePic, gender);
             $route.reload();
             console.log('stana!');

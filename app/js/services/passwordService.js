@@ -11,7 +11,7 @@ app.factory('passwordService', function ($http, baseServiceUrl, Notification) {
 
         return $http.put(passwordServiceUrl, data, {
             headers: {
-                'Authorization' : authToken
+                'Authorization': authToken
             }
         }).success(function (data) {
             Notification.success(data.message);

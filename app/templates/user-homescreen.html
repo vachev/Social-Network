@@ -3,43 +3,77 @@
     <div ng-include="'templates/components/navigation.html'"></div>
 
     <h1>News Feed</h1>
+
     <div class="col-md-8">
-                <div ng-if="posts.length == 0"><p>You dont have any friends, use the search bar to find some :)</p></div>
-                <div ng-repeat="post in posts">
+        <div ng-if="posts.length == 0"><p>You dont have any friends, use the search bar to find some :)</p></div>
+        <div ng-repeat="post in posts">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <img class="pull-right img-circle img-thumbnail img-medium"
+                         ng-src="{{post.author.profileImageData}}" alt=""/>
+                    <a type="button" ng-href="#/users/{{post.author.username}}"><h4>{{post.author.name}}</h4></a>
+                    <h5>{{post.date | date:'dd MMM yyyy | HH:mm'}}</h5><br/>
+
+                    <p>{{post.postContent}}</p>
+                </div>
+
+                <div class="panel-footer text-right">
+                    <div class="pull-left">{{post.likesCount}} likes, {{post.totalCommentsCount}} comments</div>
+                    <a type="button" ng-if="!post.liked" ng-click="likePost(post.id)">Like</a>
+                    <a type="button" ng-if="post.liked" ng-click="dislikePost(post.id)">Dislike</a> |
+                    <a type="button" ng-click="commentClicked = true">Comment</a>
+                </div>
+                <div class="form-group center-block" ng-if="commentClicked">
+                    <div class="row center-block">
+                        <div class="col-md-8">
+                            <label class="control-label" for="inputLarge">New comment</label>
+                            <input class="form-control input-lg" type="text" id="inputLarge" ng-model="commentContent">
+                            <button class="btn btn-primary" ng-click="commentPost(commentContent, post.id)">Submit</button>
+                            <button class="btn btn-danger" ng-click="removeBar()">Cancel</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div ng-repeat="comment in post.comments" class="col-md-offset-1 col-md-11">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <img class="pull-right img-circle img-thumbnail img-medium"
-                                 ng-src="{{post.author.profileImageData}}" alt=""/>
-                            <a ng-href="#/users/{{post.author.username}}"><h4>{{post.author.name}}</h4></a>
-                            <h5>{{post.date}}</h5><br/>
+                                 ng-src="{{comment.author.profileImageData}}" alt=""/>
+                            <a ng-href="#/users/{{comment.author.username}}"><h4>{{comment.author.name}}</h4></a>
+                            <h5>{{comment.date | date:'dd MMM yyyy | HH:mm'}}</h5><br/>
 
-                            <p>{{post.postContent}}</p>
+                            <p>{{comment.commentContent}}</p>
                         </div>
-                        <div class="panel-footer text-right">{{post.likesCount}}
-                            <a ng-if="!post.liked" ng-click="likePost(post.id)">Like</a>
-                            <a ng-if="post.liked" ng-click="dislikePost(post.id)">Dislike</a> |
-                            {{post.totalCommentsCount}} <a href="">Comment</a>
+                        <div class="panel-footer text-right">
+                            <div class="pull-left">{{comment.likesCount}} likes</div>
+                            <a type="button" type="button" ng-if="!comment.liked" ng-click="likeComment(post.id, comment.id)">Like</a>
+                            <a type="button" type="button" ng-if="comment.liked" ng-click="dislikeComment(post.id, comment.id)">Dislike</a>
+                            <a type="button" ng-if="comment.author.username === username" ng-click="deleteComment(post.id, comment.id)"> Delete</a>
+                            <a type="button" ng-if="comment.author.username === username" ng-click="changeEditValue()"> Edit</a>
                         </div>
-                    </div>
-                    <div class="row">
-                    <div ng-repeat="comment in post.comments" class="col-md-offset-1 col-md-11">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <img class="pull-right img-circle img-thumbnail img-medium"
-                                     ng-src="{{comment.author.profileImageData}}" alt=""/>
-                                <a ng-href="#/users/{{comment.author.username}}"><h4>{{comment.author.name}}</h4></a>
-                                <h5>{{comment.date}}</h5><br/>
-                                <p>{{comment.commentContent}}</p>
+                        <div class="form-group center-block" ng-if="editCommentClicked">
+                            <div class="row center-block">
+                                <div class="col-md-8">
+                                    <label class="control-label" for="inputComment">Edit comment</label>
+                                    <input class="form-control input-lg" type="text" id="inputComment" ng-model="commentContentNew">
+                                    <button class="btn btn-primary" ng-click="editComment(post.id, comment.id, commentContentNew)">Submit</button>
+                                    <button class="btn btn-danger" ng-click="changeEditValue()">Cancel</button>
+                                </div>
+
                             </div>
-                            <div class="panel-footer text-right">
-                                {{comment.likesCount}} <a type="button">Like</a>
-                            </div>
-                        </div>
-                    </div>
                         </div>
                 </div>
 
+                </div>
+            </div>
         </div>
+
+    </div>
 
     <div ng-include="'templates/components/right-sidebar.html'"></div>
 </div>

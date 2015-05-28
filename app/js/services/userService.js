@@ -5,53 +5,81 @@ app.factory('userService', function ($http, baseServiceUrl, $route) {
 
         return $http.get(aboutMeUrl, {
             headers: {
-                'Authorization' : localStorage['Authorization']
+                'Authorization': localStorage['Authorization']
             }
         });
     }
+
     function getFriendRequests() {
         var aboutMeUrl = baseServiceUrl + '/api/me/requests';
 
         return $http.get(aboutMeUrl, {
             headers: {
-                'Authorization' : localStorage['Authorization']
+                'Authorization': localStorage['Authorization']
             }
         });
     }
+
     function getFriends() {
-        var aboutMeUrl = baseServiceUrl + '/api/me/friends/preview';
+        var aboutMeUrl = baseServiceUrl + '/api/me/friends';
 
         return $http.get(aboutMeUrl, {
             headers: {
-                'Authorization' : localStorage['Authorization']
+                'Authorization': localStorage['Authorization']
             }
         });
     }
+
     function getFriendsByName(keywords) {
         if (keywords) {
             var friendUrl = baseServiceUrl + '/api/users/search?searchTerm=' + keywords;
 
             return $http.get(friendUrl, {
                 headers: {
-                    'Authorization' : localStorage['Authorization']
+                    'Authorization': localStorage['Authorization']
                 }
             });
         }
 
     }
-    function editProfile(name, email, profilePic, coverPic, gender) {
+
+    function editProfile(name, email, gender, profilePic, coverPic) {
         var editProfileUrl = baseServiceUrl + '/api/me';
         var data = {
             name: name,
             email: email,
-            profileImageData: profilePic,
-            coverImageData: coverPic,
             gender: gender
         };
+        if(profilePic) {
+            data['profileImageData'] = profilePic;
+        }
+        if(coverPic) {
+            data['coverImageData'] = coverPic;
+        }
 
         return $http.put(editProfileUrl, data, {
             headers: {
-                'Authorization' : localStorage['Authorization']
+                'Authorization': localStorage['Authorization']
+            }
+        });
+    }
+
+    function approveRequest(requestId) {
+        var url = baseServiceUrl + '/api/me/requests/' + requestId + '?status=approved';
+
+        return $http.put(url, null, {
+            headers: {
+                'Authorization': localStorage['Authorization']
+            }
+        });
+    }
+
+    function declineRequest(requestId) {
+        var url = baseServiceUrl + '/api/me/requests/' + requestId + '?status=rejected';
+
+        return $http.put(url, null, {
+            headers: {
+                'Authorization': localStorage['Authorization']
             }
         });
     }
@@ -61,6 +89,8 @@ app.factory('userService', function ($http, baseServiceUrl, $route) {
         getFriendRequests: getFriendRequests,
         getFriends: getFriends,
         editProfile: editProfile,
-        getFriendsByName: getFriendsByName
+        getFriendsByName: getFriendsByName,
+        approveRequest: approveRequest,
+        declineRequest: declineRequest
     };
 });
