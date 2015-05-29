@@ -5,6 +5,7 @@ app.controller('NavigationController', function ($scope, authService, userServic
     userService.getDataAboutMe().success(
         function (data) {
             $scope.name = data.name;
+            $scope.username = data.username;
             $scope.profilePic = data.profileImageData;
         }
     ).error(function () {

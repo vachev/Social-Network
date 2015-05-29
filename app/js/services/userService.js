@@ -1,4 +1,4 @@
-app.factory('userService', function ($http, baseServiceUrl, $route) {
+app.factory('userService', function ($http, baseServiceUrl, $route, $routeParams) {
 
     function getDataAboutMe() {
         var aboutMeUrl = baseServiceUrl + '/api/me';
@@ -50,10 +50,10 @@ app.factory('userService', function ($http, baseServiceUrl, $route) {
             email: email,
             gender: gender
         };
-        if(profilePic) {
+        if (profilePic) {
             data['profileImageData'] = profilePic;
         }
-        if(coverPic) {
+        if (coverPic) {
             data['coverImageData'] = coverPic;
         }
 
@@ -84,6 +84,37 @@ app.factory('userService', function ($http, baseServiceUrl, $route) {
         });
     }
 
+    function sendFriendRequest(username) {
+        var friendUrl = baseServiceUrl + '/api/me/requests/' + username;
+
+        return $http.post(friendUrl, null,{
+            headers: {
+                'Authorization': localStorage['Authorization']
+            }
+        });
+    }
+
+    function getFriendByName() {
+        var friendUrl = baseServiceUrl + '/api/users/' + $routeParams.username;
+
+        return $http.get(friendUrl, {
+            headers: {
+                'Authorization': localStorage['Authorization']
+            }
+        });
+    }
+
+    function GetFriendsFriends() {
+        var friendUrl = '/api/users/'+ $routeParams.username +'/friends/preview';
+
+        return $http.get(friendUrl, {
+            headers: {
+                'Authorization': localStorage['Authorization']
+            }
+        });
+    }
+
+
     return {
         getDataAboutMe: getDataAboutMe,
         getFriendRequests: getFriendRequests,
@@ -91,6 +122,9 @@ app.factory('userService', function ($http, baseServiceUrl, $route) {
         editProfile: editProfile,
         getFriendsByName: getFriendsByName,
         approveRequest: approveRequest,
-        declineRequest: declineRequest
+        declineRequest: declineRequest,
+        getFriendByName: getFriendByName,
+        sendFriendRequest: sendFriendRequest,
+        GetFriendsFriends: GetFriendsFriends
     };
 });

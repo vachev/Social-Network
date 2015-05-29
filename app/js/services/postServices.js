@@ -1,4 +1,4 @@
-app.factory('postServices', function ($http, baseServiceUrl) {
+app.factory('postServices', function ($http, baseServiceUrl, $routeParams) {
     function getNewsFeedPages(pageSize, startPostId) {
         if (pageSize) {
             pageSize = 5;
@@ -69,6 +69,15 @@ app.factory('postServices', function ($http, baseServiceUrl) {
         });
     }
 
+    function deletePost(postId) {
+        var url = baseServiceUrl + '/api/Posts/' + postId;
+        return $http.delete(url, {
+            headers: {
+                'Authorization': localStorage['Authorization']
+            }
+        });
+    }
+
     function editComment(postId, commentId, commentContent) {
         var url = baseServiceUrl + '/api/posts/'+ postId +'/comments/' + commentId;
         var data = {
@@ -76,6 +85,29 @@ app.factory('postServices', function ($http, baseServiceUrl) {
         };
 
         return $http.put(url, data,{
+            headers: {
+                'Authorization': localStorage['Authorization']
+            }
+        });
+    }
+
+    function getUserWall() {
+        var url = baseServiceUrl + '/api/users/'+ $routeParams.username +'/wall?PageSize=5';
+        return $http.get(url, {
+            headers: {
+                'Authorization': localStorage['Authorization']
+            }
+        });
+    }
+
+    function publishPost(postContent) {
+        var url = baseServiceUrl + '/api/posts/';
+        var data = {
+            postContent: postContent,
+            username: $routeParams.username
+        };
+
+        return $http.post(url, data,{
             headers: {
                 'Authorization': localStorage['Authorization']
             }
@@ -90,6 +122,9 @@ app.factory('postServices', function ($http, baseServiceUrl) {
         likeComment: likeComment,
         dislikeComment: dislikeComment,
         deleteComment: deleteComment,
-        editComment: editComment
+        editComment: editComment,
+        getUserWall: getUserWall,
+        deletePost: deletePost,
+        publishPost: publishPost
     }
 });

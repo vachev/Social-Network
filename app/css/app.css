@@ -15,12 +15,17 @@
     z-index: 1;
 }
 .img-medium {
-    max-width: 75px;
+     max-width: 75px;
+ }
+.img-big {
+    max-height: 150px;
 }
 .navbar-top {
     margin-top: 10px;
 }
-
+.bot-place {
+    margin-bottom: 30px;
+}
 html, body {
     height: 100%;
     background: url(http://wallrere.com/wp-content/uploads/2015/05/white-background-wallpaper-2956247.jpg) no-repeat center center fixed;
@@ -32,4 +37,9 @@ html, body {
 
 .nopadding {
     padding: 0px;
+}
+
+.cover {
+    max-height: 200px;
+    max-width: 500px;
 }
