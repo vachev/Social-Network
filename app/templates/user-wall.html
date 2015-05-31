@@ -98,7 +98,7 @@
 
     <div ng-if="data.isFriend || data.username === me" ng-include="'templates/components/publish-post.html'"></div>
     <div ng-if="data.username === me" ng-include="'templates/components/right-sidebar.html'"></div>
-    <div ng-if="data.username != me" ng-include="'templates/components/right-sidebar-friend.html'"></div>
+    <div ng-if="data.username != me && data.isFriend" ng-include="'templates/components/right-sidebar-friend.html'"></div>
 
 </div>
 </div>

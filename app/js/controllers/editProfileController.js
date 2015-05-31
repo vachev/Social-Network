@@ -1,4 +1,4 @@
-app.controller('EditProfileController', function ($scope, userService, Notification) {
+app.controller('EditProfileController', function ($scope, userService, Notification, $route) {
 
     $scope.editProfile = function () {
         var name = $scope.name;
@@ -15,6 +15,7 @@ app.controller('EditProfileController', function ($scope, userService, Notificat
         } else {
             userService.editProfile(name, email, gender, profilePic.base64, coverPic.base64).success(function () {
                 Notification.success('Profile edit success!')
+                $route.reload();
             }).error(function (err) {
                 Notification.error(err.message);
             });

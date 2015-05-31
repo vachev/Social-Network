@@ -1,4 +1,4 @@
-app.factory('authService', function ($http, baseServiceUrl, $route, $location) {
+app.factory('authService', function ($http, baseServiceUrl, $route, $location, Notification) {
 
     function logout() {
         var logoutUrl = baseServiceUrl + '/api/users/logout';
@@ -12,9 +12,9 @@ app.factory('authService', function ($http, baseServiceUrl, $route, $location) {
             localStorage.clear();
             $location.path("/");
             $route.reload();
-            console.log('izlezna');
-        }).error(function () {
-            console.log('greshka');
+            Notification.success("You have logged out!");
+        }).error(function (err) {
+            Notification.error(err.message);
         });
     }
 
@@ -28,10 +28,10 @@ app.factory('authService', function ($http, baseServiceUrl, $route, $location) {
         $http.post(loginServiceUrl, data).success(function (data) {
             localStorage['Authorization'] = 'Bearer ' + data['access_token'];
             localStorage['username'] = data['userName'];
-            console.log("You have logged in!");
+            Notification.success("You have logged in!");
             $route.reload();
-        }).error(function () {
-            console.log("error");
+        }).error(function (err) {
+            Notification.error(err.error_description);
         });
     }
 
@@ -49,9 +49,9 @@ app.factory('authService', function ($http, baseServiceUrl, $route, $location) {
             localStorage['Authorization'] = 'Bearer ' + data['access_token'];
             localStorage['username'] = data['userName'];
             $route.reload();
-            console.log('stana!');
-        }).error(function (error) {
-            console.log(error.message);
+            Notification.success("Registration success!");
+        }).error(function (err) {
+            Notification.error(err.message);
         });
     }
 

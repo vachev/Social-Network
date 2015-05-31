@@ -61,6 +61,10 @@ app.factory('userService', function ($http, baseServiceUrl, $route, $routeParams
             headers: {
                 'Authorization': localStorage['Authorization']
             }
+        }).success(function () {
+            Notification.success('Profile edited!');
+        }).error(function (err) {
+            Notification.success(err.message);
         });
     }
 
@@ -87,7 +91,7 @@ app.factory('userService', function ($http, baseServiceUrl, $route, $routeParams
     function sendFriendRequest(username) {
         var friendUrl = baseServiceUrl + '/api/me/requests/' + username;
 
-        return $http.post(friendUrl, null,{
+        return $http.post(friendUrl, null, {
             headers: {
                 'Authorization': localStorage['Authorization']
             }
@@ -105,7 +109,27 @@ app.factory('userService', function ($http, baseServiceUrl, $route, $routeParams
     }
 
     function GetFriendsFriends() {
-        var friendUrl = '/api/users/'+ $routeParams.username +'/friends/preview';
+        var friendUrl = baseServiceUrl + '/api/users/' + $routeParams.username + '/friends/preview';
+
+        return $http.get(friendUrl, {
+            headers: {
+                'Authorization': localStorage['Authorization']
+            }
+        });
+    }
+
+    function GetDetailedFriends() {
+        var friendUrl = baseServiceUrl + '/api/users/' + $routeParams.username + '/friends';
+
+        return $http.get(friendUrl, {
+            headers: {
+                'Authorization': localStorage['Authorization']
+            }
+        });
+    }
+
+    function GetDetailedFriendsAboutMe() {
+        var friendUrl = baseServiceUrl + '/api/me/friends';
 
         return $http.get(friendUrl, {
             headers: {
@@ -125,6 +149,8 @@ app.factory('userService', function ($http, baseServiceUrl, $route, $routeParams
         declineRequest: declineRequest,
         getFriendByName: getFriendByName,
         sendFriendRequest: sendFriendRequest,
-        GetFriendsFriends: GetFriendsFriends
+        GetFriendsFriends: GetFriendsFriends,
+        GetDetailedFriends: GetDetailedFriends,
+        GetDetailedFriendsAboutMe: GetDetailedFriendsAboutMe
     };
 });

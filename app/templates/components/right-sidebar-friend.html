@@ -11,8 +11,8 @@
                      src="{{defaultPic}}"/>
             </a>
 
-            <div class="panel-footer text-right">
-                <a>See all</a>
+            <div class="panel-footer text-right" ng-controller="UserWallController">
+                <a ng-href="#/users/{{data.username}}/friends">See all</a>
             </div>
 
         </div>

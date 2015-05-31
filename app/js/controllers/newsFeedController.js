@@ -46,6 +46,7 @@ app.controller('NewsFeedController', function ($scope, postServices, Notificatio
     $scope.deleteComment = function (postId, commentId) {
         postServices.deleteComment(postId, commentId).success(function () {
             updateNews();
+            Notification.success('Comment deleted!');
         })
     };
 
@@ -53,6 +54,7 @@ app.controller('NewsFeedController', function ($scope, postServices, Notificatio
         postServices.editComment(postId, commentId, commentContent).success(function () {
             $scope.editCommentClicked = false;
             updateNews();
+            Notification.success('Comment edited!');
         })
     };
 

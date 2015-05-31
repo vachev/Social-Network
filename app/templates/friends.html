@@ -1,0 +1,25 @@
+<div class="container">
+
+    <div ng-include="'templates/components/navigation.html'"></div>
+
+    <h1>Friends</h1>
+    {{k}}
+    <table class="table table-striped table-hover ">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="friend in friends">
+            <td>
+                <img ng-if="friend.profileImageData" class="img-medium" ng-src="{{friend.profileImageData}}" alt="Profile picture">
+                <img ng-if="!friend.profileImageData" class="img-medium" src="img/profile.png" alt="Profile picture">
+            </td>
+            <td><a ng-href="#/users/{{friend.username}}"><h3>{{friend.name}}</h3></a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

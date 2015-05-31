@@ -4,8 +4,8 @@ app.controller('SidebarController', function ($scope, authService, userService, 
         function (data) {
             $scope.totalFriends = data.length;
             $scope.friends = data;
-
         }
     );
     $scope.defaultPic = defaultProfilePic;
+    $scope.me = localStorage['username'];
 });

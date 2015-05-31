@@ -1,7 +1,6 @@
-app.controller('SidebarFriendController', function ($scope, userService) {
-    $scope.GetFriendsFriends = function () {
+app.controller('SidebarFriendController', function ($scope, userService, defaultProfilePic) {
         userService.GetFriendsFriends().success(function (data) {
             $scope.friends = data;
-        })
-    }
+        });
+    $scope.defaultPic = defaultProfilePic;
 });

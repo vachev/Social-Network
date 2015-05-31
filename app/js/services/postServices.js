@@ -66,6 +66,8 @@ app.factory('postServices', function ($http, baseServiceUrl, $routeParams) {
             headers: {
                 'Authorization': localStorage['Authorization']
             }
+        }).success(function () {
+            Notification.success('Comment deleted!');
         });
     }
 
@@ -75,6 +77,8 @@ app.factory('postServices', function ($http, baseServiceUrl, $routeParams) {
             headers: {
                 'Authorization': localStorage['Authorization']
             }
+        }).success(function () {
+            Notification.success('Post deleted!');
         });
     }
 
@@ -88,6 +92,8 @@ app.factory('postServices', function ($http, baseServiceUrl, $routeParams) {
             headers: {
                 'Authorization': localStorage['Authorization']
             }
+        }).success(function () {
+            Notification.success('Comment edited!');
         });
     }
 
@@ -111,6 +117,8 @@ app.factory('postServices', function ($http, baseServiceUrl, $routeParams) {
             headers: {
                 'Authorization': localStorage['Authorization']
             }
+        }).success(function () {
+            Notification.success('Published!');
         });
     }
 
