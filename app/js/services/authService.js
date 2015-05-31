@@ -1,4 +1,4 @@
-app.factory('authService', function ($http, baseServiceUrl, $route, userService, defaultProfilePic) {
+app.factory('authService', function ($http, baseServiceUrl, $route, $location) {
 
     function logout() {
         var logoutUrl = baseServiceUrl + '/api/users/logout';
@@ -10,6 +10,7 @@ app.factory('authService', function ($http, baseServiceUrl, $route, userService,
             }
         }).success(function () {
             localStorage.clear();
+            $location.path("/");
             $route.reload();
             console.log('izlezna');
         }).error(function () {
@@ -47,7 +48,6 @@ app.factory('authService', function ($http, baseServiceUrl, $route, userService,
         return $http.post(registerServiceUrl, data).success(function (data) {
             localStorage['Authorization'] = 'Bearer ' + data['access_token'];
             localStorage['username'] = data['userName'];
-            userService.editProfile(name, email, defaultProfilePic, defaultProfilePic, gender);
             $route.reload();
             console.log('stana!');
         }).error(function (error) {

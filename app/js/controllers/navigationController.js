@@ -1,6 +1,8 @@
-app.controller('NavigationController', function ($scope, authService, userService, defaultProfilePic, $route) {
+app.controller('NavigationController', function ($scope, authService, userService, defaultProfilePic, $route, $location) {
     $scope.logoutUser = function () {
         authService.logout();
+        $location.path("/");
+        $route.reload();
     };
     userService.getDataAboutMe().success(
         function (data) {

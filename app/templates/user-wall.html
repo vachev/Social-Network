@@ -3,7 +3,8 @@
     <div ng-include="'templates/components/navigation.html'"></div>
     <div class="row bot-place">
     <div class="col-lg-4">
-        <img class="img-big img-thumbnail center-block" ng-src="{{data.profileImageData}}" alt="Profile Picture">
+        <img ng-if="data.profileImageData" class="img-big img-thumbnail center-block" ng-src="{{data.profileImageData}}" alt="Profile Picture">
+        <img ng-if="!data.profileImageData" class="img-big img-thumbnail center-block" src="img/profile.png" alt="Profile Picture">
         <h1 class="text-center">{{data.name}}</h1>
         <div ng-if="data.username != me">
             <span class="label label-success center-block" ng-if="data.isFriend">in your friends!</span>
@@ -12,7 +13,8 @@
         </div>
     </div>
     <div class="col-lg-8">
-        <img class="center-block cover" ng-src="{{data.coverImageData}}">
+        <img ng-if="data.coverImageData" class="center-block cover" ng-src="{{data.coverImageData}}">
+        <img ng-if="!data.coverImageData" class="center-block cover" src="img/cover.jpg">
     </div>
     </div>
 
@@ -21,8 +23,10 @@
         <div ng-repeat="post in posts">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <img class="pull-right img-circle img-thumbnail img-medium"
+                    <img ng-if="post.author.profileImageData" class="pull-right img-circle img-thumbnail img-medium"
                          ng-src="{{post.author.profileImageData}}" alt=""/>
+                    <img ng-if="!post.author.profileImageData" class="pull-right img-circle img-thumbnail img-medium"
+                         src="img/profile.png" alt=""/>
                     <a type="button" ng-href="#/users/{{post.author.username}}"><h4>{{post.author.name}}</h4></a>
                     <h5>{{post.date | date:'dd MMM yyyy | HH:mm'}}</h5><br/>
 
@@ -34,7 +38,7 @@
                     <a type="button" ng-if="!post.liked && post.author.isFriend" ng-click="likePost(post.id)">Like</a>
                     <a type="button" ng-if="!post.liked && post.author.username === me" ng-click="likePost(post.id)">Like</a>
                     <a type="button" ng-if="post.liked" ng-click="dislikePost(post.id)">Dislike</a> |
-                    <a type="button" ng-click="commentClicked = true" ng-if="post.author.isFriend">Comment</a>
+                    <a type="button" ng-click="changeCommentClickedTrue()" ng-if="post.author.isFriend || post.author.username === me">Comment</a>
                     <a type="button" ng-if="post.author.username === me" ng-click="deletePost(post.id)"> Delete</a>
                     <!--<a type="button" ng-if="post.author.username === me" ng-click="changeEditValue()"> Edit</a>-->
                 </div>
@@ -57,8 +61,10 @@
                 <div ng-repeat="comment in post.comments" class="col-md-offset-1 col-md-11">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <img class="pull-right img-circle img-thumbnail img-medium"
+                            <img ng-if="comment.author.profileImageData" class="pull-right img-circle img-thumbnail img-medium"
                                  ng-src="{{comment.author.profileImageData}}" alt=""/>
+                            <img ng-if="!comment.author.profileImageData" class="pull-right img-circle img-thumbnail img-medium"
+                                 src="img/profile.png" alt=""/>
                             <a ng-href="#/users/{{comment.author.username}}"><h4>{{comment.author.name}}</h4></a>
                             <h5>{{comment.date | date:'dd MMM yyyy | HH:mm'}}</h5><br/>
 
@@ -66,8 +72,9 @@
                         </div>
                         <div class="panel-footer text-right">
                             <div class="pull-left">{{comment.likesCount}} likes</div>
-                            <a type="button" type="button" ng-if="!comment.liked && comment.author.isFriend" ng-click="likeComment(post.id, comment.id)">Like</a>
-                            <a type="button" type="button" ng-if="comment.liked" ng-click="dislikeComment(post.id, comment.id)">Dislike</a>
+                            <a type="button" ng-if="!comment.liked" ng-click="likeComment(post.id, comment.id)">Like </a>|
+                            <a type="button" ng-if="!comment.liked && comment.author.username === me" ng-click="likeComment(post.id, comment.id)">Like </a>
+                            <a type="button" ng-if="comment.liked" ng-click="dislikeComment(post.id, comment.id)">Dislike </a>
                             <a type="button" ng-if="comment.author.username === me" ng-click="deleteComment(post.id, comment.id)"> Delete</a>
                             <a type="button" ng-if="comment.author.username === me" ng-click="changeEditValue()"> Edit</a>
                         </div>

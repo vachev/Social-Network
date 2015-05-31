@@ -57,6 +57,7 @@
 
                         <div class="col-md-9">
                             <img class="img-rounded center-block" src="{{coverPic}}" style="max-height: 110px"/>
+                            <p ng-if="!coverPic">You dont have cover picture!</p>
                             <input type="file"  class="form-control" ng-model="coverPhoto" base-sixty-four-input
                                    id="inputCoverImageData" ng-change="formatCoverImgToBase64()">
                         </div>
@@ -75,6 +76,7 @@
 
                 <div class="col-md-9">
                     <img class="img-rounded center-block" src="{{profilePic}}" style="max-height: 110px"/>
+                    <p ng-if="!profilePic">You dont have profile picture!</p>
                     <input type="file" class="form-control" ng-model="profilePhoto" base-sixty-four-input
                            id="inputProfileImageData" ng-change="formatProfileImgToBase64()">
                 </div>

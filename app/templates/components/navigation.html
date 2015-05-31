@@ -7,9 +7,12 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a ng-href="#/users/{{username}}"><img class="img-circle"
+                    <a ng-if="profilePic" ng-href="#/users/{{username}}"><img class="img-circle"
                                      style="margin: -11px 10px -9px 0px; max-width: 38px; max-height:38px"
                                      src="{{profilePic}}"/> {{name}}<span class="sr-only">(current)</span></a>
+                    <a ng-if="!profilePic" ng-href="#/users/{{username}}"><img class="img-circle"
+                                                           style="margin: -11px 10px -9px 0px; max-width: 38px; max-height:38px"
+                                                           src="img/profile.png"/> {{name}}<span class="sr-only">(current)</span></a>
                 </li>
                 <li><a href="#">My Friends</a></li>
                 <li><a type="button" ng-click="friendRequestClicked = true">Friend Requests <span class="badge">{{requestCount}}</span></a>

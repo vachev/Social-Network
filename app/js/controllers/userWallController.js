@@ -81,6 +81,10 @@ app.controller('UserWallController', function ($scope, $route, userService, post
         })
     };
 
+    $scope.changeCommentClickedTrue = function () {
+        $scope.commentClicked = true;
+    };
+
     $scope.editCommentClicked = false;
     $scope.commentClicked = false;
     $scope.me = localStorage['username'];
